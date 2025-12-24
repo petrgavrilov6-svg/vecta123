@@ -1,0 +1,30 @@
+{
+  "name": "vecta-crm",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VECTA CRM - SaaS CRM система",
+  "workspaces": [
+    "frontend",
+    "backend",
+    "admin"
+  ],
+  "scripts": {
+    "dev": "concurrently -n backend,frontend,admin -c blue,green,yellow \"cd backend && npm run dev\" \"cd frontend && npm run dev\" \"cd admin && npm run dev\"",
+    "dev:backend": "cd backend && npm run dev --workspaces=false",
+    "dev:frontend": "cd frontend && npm run dev --workspaces=false",
+    "dev:admin": "cd admin && npm run dev --workspaces=false",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:logs": "docker compose logs -f",
+    "prisma:migrate": "cd backend && npm run prisma:migrate",
+    "prisma:seed": "cd backend && npm run prisma:seed",
+    "prisma:studio": "cd backend && npm run prisma:studio",
+    "install:all": "npm install",
+    "build": "cd frontend && npm run build && cd ../admin && npm run build && cd ../backend && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
+
+
